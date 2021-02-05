@@ -5,7 +5,7 @@ import Sidebar from "./Sidebar.jsx";
 import Chat from "./Chat.jsx";
 import "./styles/App.css";
 
-function App() {
+function App({user}) {
 
   const [messages, setMessages] = useState([]);
 
@@ -32,7 +32,7 @@ function App() {
     <div className="app">
       <div className="app__body">
         <Sidebar />
-        <Chat messages={messages}/>
+        <Chat messages={messages} user={user}/>
       </div>
     </div>
   );

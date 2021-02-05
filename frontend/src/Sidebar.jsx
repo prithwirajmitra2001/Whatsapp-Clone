@@ -1,7 +1,6 @@
 import React from "react";
 import "./styles/Sidebar.css";
 import "./styles/SidebarChat.css";
-
 import SidebarDropdown from "./components/SidebarDropdown.jsx";
 import sidebarChats from "./data/sidebarChats.js";
 

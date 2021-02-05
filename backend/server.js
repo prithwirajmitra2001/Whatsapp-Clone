@@ -3,6 +3,7 @@ import express from "express";
 import mongoose from "mongoose";
 import Pusher from "pusher";
 import Messages from "./dbMessages.js";
+import Auth from "./dbAuth.js";
 import cors from "cors";
 
 // App config
@@ -38,8 +39,7 @@ db.once('open', function() {
             pusher.trigger('messages', 'inserted', {
                     "name": messageDetails.name,
                     "message": messageDetails.message,
-                    "timestamp": messageDetails.timestamp,
-                    "received": messageDetails.received,
+                    "timestamp": messageDetails.timestamp
                 });
         } else {
             console.log("Error triggiring Pusher");
@@ -49,6 +49,7 @@ db.once('open', function() {
 
 // API Routes
 
+// dbMessages Route
 app.get("/messages/read", function(req, res) {
 
     Messages.find(function(err, data) {
@@ -64,6 +65,30 @@ app.post("/messages/create", function(req, res) {
 
     const dbMessage = req.body;
     Messages.create(dbMessage, function(err, data) {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.status(201).send(data);
+        }
+    });
+});
+
+// dbAuthentication Route
+app.get("/auth/read", function(req, res) {
+
+    Auth.find(function(err, data) {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.status(200).send(data);
+        }
+    });
+});
+
+app.post("/auth/create", function(req, res) {
+
+    const dbAuth = req.body;
+    Auth.create(dbAuth, function(err, data) {
         if (err) {
             res.status(500).send(err);
         } else {

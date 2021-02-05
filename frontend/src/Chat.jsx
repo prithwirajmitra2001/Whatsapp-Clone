@@ -9,7 +9,7 @@ import AttachFileIcon from '@material-ui/icons/AttachFile';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import MicIcon from '@material-ui/icons/Mic';
 
-function Chat({messages}) {
+function Chat({messages, user}) {
 
     const [input, setInput] = useState("");
 
@@ -17,10 +17,9 @@ function Chat({messages}) {
         event.preventDefault();
         
         await axios.post("/messages/create", {
-            "name": "Sayantan",
+            "name": user,
             "timestamp": new Date().toLocaleDateString(),
             "message": input,
-            "received": false
         });
 
         setInput("");
@@ -33,7 +32,7 @@ function Chat({messages}) {
             <div className = "chat__header">
                 <Avatar src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7Gvm-dN3ZscTN56tNhWGhMjqosZ27qeBhSg&usqp=CAU" />
                 <div className = "chat__headerInfo">
-                    <h3>Room 1</h3>
+                    <h3>Room</h3>
                     <p>Online</p>
                 </div>
                 <div className = "chat__headerRight">
@@ -46,7 +45,7 @@ function Chat({messages}) {
             <div className = "chat__body">
                 {messages.map(function(message, index) {
                     return (
-                        <p className = {(message.received) ? "chat__message" : "chat__message chat__reciever"} key={index}>
+                        <p className = {(message.name === user) ? "chat__message chat__reciever" : "chat__message"} key={index}>
                             <span className="chat__desc">{message.message}</span>
                             <span className="chat__timestamp">{message.timestamp}</span>
                         </p>);
