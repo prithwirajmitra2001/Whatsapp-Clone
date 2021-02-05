@@ -1,5 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import SignIn from "./SignIn.jsx";
+import Welcome from "./Welcome.jsx";
 
-ReactDOM.render(<SignIn />, document.getElementById("root"));
+ReactDOM.render(<Welcome />, document.getElementById("root"));

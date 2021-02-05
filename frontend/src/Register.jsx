@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import ReactDOM from "react-dom";
-import "./styles/SignIn.css";
+import "./styles/Register.css";
 import App from "./App.jsx";
 import axios from "./axios";
 
@@ -12,7 +12,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 
-function SignIn() {
+function Register() {
 
   const [inputUsername, setUsername] = useState("");
   const [inputPassword, setPassword] = useState("");
@@ -20,16 +20,12 @@ function SignIn() {
   const sendAuth = async(event) => {
     event.preventDefault();
 
-    axios.get("/auth/read").then(function(res) {
-      res.data.forEach(function(data) {
-        if ((data.username === inputUsername) && (data.password === inputPassword)) {
-          ReactDOM.render(<App user={inputUsername}/>, document.getElementById("root"));
-        }
-      });
+    await axios.post("/auth/create", {
+      "username": inputUsername,
+      "password": inputPassword
     });
 
-    setUsername("");
-    setPassword("");
+    ReactDOM.render(<App user={inputUsername}/>, document.getElementById("root"));
   };
 
   return (
@@ -39,10 +35,10 @@ function SignIn() {
         <Avatar className="avatar">
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">Sign in</Typography>
+        <Typography component="h1" variant="h5">Register</Typography>
         <form className="form" noValidate>
           <TextField
-            variant="outlined" margin="normal" required fullWidth label="Username"
+            variant="outlined" margin="normal" required fullWidth label="Name"
             value={inputUsername}
             onChange={(event) => setUsername(event.target.value)}
           />
@@ -51,12 +47,15 @@ function SignIn() {
             value={inputPassword}
             onChange={(event) => setPassword(event.target.value)}
           />
+          <TextField
+            variant="outlined" margin="normal" required fullWidth label="Re-Enter Password" type="password"
+          />
           <Button
             type="submit" fullWidth variant="contained" color="primary"
             className="submit"
             onClick={sendAuth}
           >
-            Sign In
+            Register
           </Button>
         </form>
       </div>
@@ -64,4 +63,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default Register;
