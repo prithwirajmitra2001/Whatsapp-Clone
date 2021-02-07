@@ -49,7 +49,7 @@ function Chat({messages, user}) {
                             <span className="chat__desc">{message.message}</span>
                             <span className="chat__timestamp">{message.timestamp}</span>
                         </p>);
-                })};
+                })}
             </div>
 
             <div className = "chat__footer">

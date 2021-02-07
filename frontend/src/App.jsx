@@ -31,7 +31,7 @@ function App({user}) {
   return (
     <div className="app">
       <div className="app__body">
-        <Sidebar />
+        <Sidebar messages={messages} user={user}/>
         <Chat messages={messages} user={user}/>
       </div>
     </div>

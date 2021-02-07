@@ -76,11 +76,23 @@ app.post("/messages/create", function(req, res) {
 // dbAuthentication Route
 app.get("/auth/read", function(req, res) {
 
-    Auth.find(function(err, data) {
+    Auth.find(function(err, found) {
         if (err) {
             res.status(500).send(err);
         } else {
-            res.status(200).send(data);
+            res.status(200).send(found);
+        }
+    });
+});
+
+app.put("/auth/find", function(req, res) {
+
+    const findData = req.body;
+    Auth.find(findData, function(err, found) {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.status(200).send(found);
         }
     });
 });

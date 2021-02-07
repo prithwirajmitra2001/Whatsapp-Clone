@@ -20,12 +20,16 @@ function SignIn() {
   const sendAuth = async(event) => {
     event.preventDefault();
 
-    axios.get("/auth/read").then(function(res) {
-      res.data.forEach(function(data) {
-        if ((data.username === inputUsername) && (data.password === inputPassword)) {
-          ReactDOM.render(<App user={inputUsername}/>, document.getElementById("root"));
-        }
-      });
+    axios.put("/auth/find", {
+      username: inputUsername,
+      password: inputPassword
+    })
+    .then(function(res) {
+      if (res.data.length === 1) {
+        ReactDOM.render(<App user={inputUsername}/>, document.getElementById("root"));
+      } else {
+        alert("Either username or password is wrong");
+      }
     });
 
     setUsername("");
