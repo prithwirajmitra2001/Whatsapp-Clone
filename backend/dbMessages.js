@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 
 const whatsappSchema = new mongoose.Schema({
-    name: String,
+    from: String,
+    to: String,
     timestamp: String,
     message: String
 });

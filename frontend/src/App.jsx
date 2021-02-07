@@ -4,7 +4,7 @@ import axios from "./axios.js";
 import Sidebar from "./Sidebar.jsx";
 import Chat from "./Chat.jsx";
 import "./styles/App.css";
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 function App({user}) {
 
@@ -32,23 +32,12 @@ function App({user}) {
   return (
     <div className="app">
       <div className="app__body">
-{/*        
         <Router>
-          <Switch>
-            <Sidebar messages={messages} user={user}/>
-            <Route path="/rooms/:roomId">
-              <Chat messages={messages} user={user}/>
-            </Route>
-            <Route path="/">
-              <Chat messages={messages} user={user}/>
-            </Route>
-          </Switch>
+          <Sidebar/>
+          <Route path="/rooms/:roomId">
+            <Chat messages={messages} user={user}/>
+          </Route>
         </Router>
-*/}
-
-        <Sidebar messages={messages} user={user}/>
-        <Chat messages={messages} user={user}/>
-        
       </div>
     </div>
   );

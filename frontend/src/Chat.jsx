@@ -1,6 +1,7 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import "./styles/Chat.css";
 import axios from "./axios";
+import {useParams} from "react-router-dom";
 
 import {Avatar, IconButton} from '@material-ui/core';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
@@ -12,12 +13,21 @@ import MicIcon from '@material-ui/icons/Mic';
 function Chat({messages, user}) {
 
     const [input, setInput] = useState("");
+    const {roomId} = useParams();
+    const [roomName, setRoomName] = useState("");
+
+    useEffect(() => {
+        if (roomId) {
+            setRoomName(roomId);
+        }
+    }, [roomId]);
 
     const sendMessage = async(event) => {
         event.preventDefault();
         
         await axios.post("/messages/create", {
-            "name": user,
+            "from": user,
+            "to": roomName,
             "timestamp": new Date().toLocaleDateString(),
             "message": input,
         });
@@ -32,7 +42,7 @@ function Chat({messages, user}) {
             <div className = "chat__header">
                 <Avatar src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7Gvm-dN3ZscTN56tNhWGhMjqosZ27qeBhSg&usqp=CAU" />
                 <div className = "chat__headerInfo">
-                    <h3>Room</h3>
+                    <h3>{roomName}</h3>
                     <p>Online</p>
                 </div>
                 <div className = "chat__headerRight">
@@ -44,11 +54,14 @@ function Chat({messages, user}) {
 
             <div className = "chat__body">
                 {messages.map(function(message, index) {
-                    return (
-                        <p className = {(message.name === user) ? "chat__message chat__reciever" : "chat__message"} key={index}>
-                            <span className="chat__desc">{message.message}</span>
-                            <span className="chat__timestamp">{message.timestamp}</span>
-                        </p>);
+                    if (message.to === roomName)
+                    {
+                        return (
+                            <p className = {(message.from === user) ? "chat__message chat__reciever" : "chat__message"} key={index}>
+                                <span className="chat__desc">{message.message}</span>
+                                <span className="chat__timestamp">{message.timestamp}</span>
+                            </p>);
+                    }
                 })}
             </div>
 

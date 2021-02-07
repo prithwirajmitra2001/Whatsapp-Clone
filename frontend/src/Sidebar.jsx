@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import "./styles/Sidebar.css";
 import "./styles/SidebarChat.css";
+import {Link} from "react-router-dom";
 
 import {Avatar, IconButton} from '@material-ui/core';
 import ChatIcon from '@material-ui/icons/Chat';
@@ -14,7 +15,9 @@ function Sidebar() {
 
     function addFriend() {
         const person = prompt("Enter name:");
-        setPersons([...persons, person]);
+        if (person != null && person !== "") {
+            setPersons([...persons, person]);
+        }
     }
 
     return (
@@ -41,12 +44,14 @@ function Sidebar() {
             <div style={{overflow: "auto"}}>
                 {persons.map((chatHeader, index) => {
                     return (
-                    <div className="sidebarChat" key={index}>
-                        <Avatar src="https://preview.redd.it/rz4859l8vaw11.jpg?width=640&crop=smart&auto=webp&s=1d906c4fe4de94df926eba82dade7582fc7d3e20" />
-                        <div className="sidebarChat__info">
-                            <h4>{chatHeader}</h4>
-                        </div>
-                    </div>
+                        <Link to={'/rooms/' + chatHeader} key={index}>
+                            <div className="sidebarChat" key={index}>
+                                <Avatar src="https://preview.redd.it/rz4859l8vaw11.jpg?width=640&crop=smart&auto=webp&s=1d906c4fe4de94df926eba82dade7582fc7d3e20" />
+                                <div className="sidebarChat__info">
+                                    <h4>{chatHeader}</h4>
+                                </div>
+                            </div>
+                        </Link>
                     );
                 })}
             </div>
