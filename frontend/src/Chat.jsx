@@ -40,7 +40,7 @@ function Chat({messages, user}) {
         <div className = "chat">
 
             <div className = "chat__header">
-                <Avatar src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7Gvm-dN3ZscTN56tNhWGhMjqosZ27qeBhSg&usqp=CAU" />
+                <Avatar src="https://preview.redd.it/rz4859l8vaw11.jpg?width=640&crop=smart&auto=webp&s=1d906c4fe4de94df926eba82dade7582fc7d3e20" />
                 <div className = "chat__headerInfo">
                     <h3>{roomName}</h3>
                     <p>Online</p>
@@ -54,7 +54,7 @@ function Chat({messages, user}) {
 
             <div className = "chat__body">
                 {messages.map(function(message, index) {
-                    if (message.to === roomName)
+                    if (message.to === roomName || message.from === roomName)
                     {
                         return (
                             <p className = {(message.from === user) ? "chat__message chat__reciever" : "chat__message"} key={index}>
