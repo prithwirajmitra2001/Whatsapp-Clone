@@ -88,11 +88,13 @@ app.get("/auth/read", function(req, res) {
 app.put("/auth/find", function(req, res) {
 
     const findData = req.body;
-    Auth.find(findData, function(err, found) {
+    Auth.findOne(findData, function(err, found) {
         if (err) {
             res.status(500).send(err);
+        } else if (found) {
+            res.status(200).send(true);
         } else {
-            res.status(200).send(found);
+            res.status(200).send(false);
         }
     });
 });

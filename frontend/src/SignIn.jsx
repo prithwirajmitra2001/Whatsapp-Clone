@@ -25,10 +25,10 @@ function SignIn() {
       password: inputPassword
     })
     .then(function(res) {
-      if (res.data.length === 1) {
+      if (res.data) {
         ReactDOM.render(<App user={inputUsername}/>, document.getElementById("root"));
       } else {
-        alert("Either username or password is wrong");
+        alert("Either username or password is wrong !!!.");
       }
     });
 
