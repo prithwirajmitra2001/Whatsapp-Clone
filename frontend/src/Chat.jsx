@@ -54,7 +54,7 @@ function Chat({messages, user}) {
 
             <div className = "chat__body">
                 {messages.map(function(message, index) {
-                    if (message.to === roomName || message.from === roomName)
+                    if ((message.from === user && message.to === roomName) || ((message.from === roomName && message.to === user)))
                     {
                         return (
                             <p className = {(message.from === user) ? "chat__message chat__reciever" : "chat__message"} key={index}>

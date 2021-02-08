@@ -2,6 +2,8 @@
 import express from "express";
 import mongoose from "mongoose";
 import Pusher from "pusher";
+import dotenv from 'dotenv';
+dotenv.config();
 import Messages from "./dbMessages.js";
 import Auth from "./dbAuth.js";
 import cors from "cors";
@@ -11,10 +13,10 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 const pusher = new Pusher({
-    appId: "1148341",
-    key: "c26dd59ac42ff0684540",
-    secret: "98c4d32f59888be1357b",
-    cluster: "ap2",
+    appId: process.env.APPID,
+    key: process.env.KEY,
+    secret: process.env.SECRET,
+    cluster: process.env.CLUSTER,
     useTLS: true
 });
 
@@ -23,8 +25,7 @@ app.use(express.json());
 app.use(cors());
 
 // DB config
-const url = "mongodb+srv://prithwiraj:uPUmQK3iFOCFgE89@cluster0.nnxss.mongodb.net/whatsappDB?retryWrites=true&w=majority";
-mongoose.connect(url, {useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(process.env.CONST_URl, {useNewUrlParser: true, useUnifiedTopology: true});
 
 const db = mongoose.connection;
 db.once('open', function() {
@@ -75,17 +76,6 @@ app.post("/messages/create", function(req, res) {
 });
 
 // dbAuthentication Route
-app.get("/auth/read", function(req, res) {
-
-    Auth.find(function(err, found) {
-        if (err) {
-            res.status(500).send(err);
-        } else {
-            res.status(200).send(found);
-        }
-    });
-});
-
 app.put("/auth/find", function(req, res) {
 
     const findData = req.body;
