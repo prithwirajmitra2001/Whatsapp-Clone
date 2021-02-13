@@ -10,7 +10,7 @@ import cors from "cors";
 
 // App config
 const app = express();
-const port = process.env.PORT || 5000;
+const port = 5000;
 
 const pusher = new Pusher({
     appId: process.env.APPID,
@@ -25,10 +25,11 @@ app.use(express.json());
 app.use(cors());
 
 // DB config
-mongoose.connect(process.env.CONST_URl, {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(process.env.URL, {useNewUrlParser: true, useUnifiedTopology: true});
 
 const db = mongoose.connection;
 db.once('open', function() {
+    console.log("DB Connected");
 
     const msgCollection = db.collection("messagecontents");
     const changeStream = msgCollection.watch();
@@ -38,13 +39,16 @@ db.once('open', function() {
         if (change.operationType === 'insert') {
             const messageDetails = change.fullDocument;
             pusher.trigger('messages', 'inserted', {
-                    "from": messageDetails.from,
-                    "to": messageDetails.to,
-                    "message": messageDetails.message,
-                    "timestamp": messageDetails.timestamp
-                });
+                "from": messageDetails.from,
+                "to": messageDetails.to,
+                "message": messageDetails.message,
+                "timestamp": messageDetails.timestamp
+            });
+        } else if (change.operationType === 'delete') {
+            pusher.trigger('messages', 'deleted', change.documentKey._id
+            );
         } else {
-            console.log("Error triggiring Pusher");
+            console.log("Error triggering Pusher");
         }
     });
 });

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
+import {useParams} from "react-router-dom";
 import "./styles/Chat.css";
 import axios from "./axios";
-import {useParams} from "react-router-dom";
 
 import {Avatar, IconButton} from '@material-ui/core';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
@@ -28,7 +28,7 @@ function Chat({messages, user}) {
         await axios.post("/messages/create", {
             "from": user,
             "to": roomName,
-            "timestamp": new Date().toLocaleDateString(),
+            "timestamp": new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds(),
             "message": input,
         });
 

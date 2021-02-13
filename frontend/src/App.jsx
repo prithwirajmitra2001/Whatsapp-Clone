@@ -19,8 +19,15 @@ function App({user}) {
   useEffect(function() {
     const pusher = new Pusher('c26dd59ac42ff0684540', { cluster: 'ap2' });
     const channel = pusher.subscribe('messages');
+    
     channel.bind('inserted', function(newMessage) {
       setMessages([...messages, newMessage]);
+    });
+
+    channel.bind('deleted', function() {
+      axios.get("/messages/read").then(function(res) {
+        setMessages(res.data);
+      });
     });
 
     return () => {
