@@ -79,6 +79,16 @@ app.post("/messages/create", function(req, res) {
     });
 });
 
+app.put("/messages/delete", function(req, res) {
+
+    const dbMessage = req.body;
+    Messages.deleteOne(dbMessage, function(err) {
+        if (err) {
+            res.status(500).send(err);
+        }
+    });
+});
+
 // dbAuthentication Route
 app.put("/auth/find", function(req, res) {
 

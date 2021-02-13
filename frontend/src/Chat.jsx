@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {useParams, Link} from "react-router-dom";
 import "./styles/Chat.css";
 import axios from "./axios";
 
@@ -9,11 +9,12 @@ import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import AttachFileIcon from '@material-ui/icons/AttachFile';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import MicIcon from '@material-ui/icons/Mic';
+import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
 
 function Chat({messages, user}) {
 
     const [input, setInput] = useState("");
-    const {roomId} = useParams();
+    const {roomId, deleteId} = useParams();
     const [roomName, setRoomName] = useState("");
 
     useEffect(() => {
@@ -21,6 +22,12 @@ function Chat({messages, user}) {
             setRoomName(roomId);
         }
     }, [roomId]);
+
+    useEffect(() => {
+        if (deleteId) {
+            axios.put("/messages/delete", messages[deleteId]);
+        }
+    }, [deleteId]);
 
     const sendMessage = async(event) => {
         event.preventDefault();
@@ -60,6 +67,11 @@ function Chat({messages, user}) {
                             <p className = {(message.from === user) ? "chat__message chat__reciever" : "chat__message"} key={index}>
                                 <span className="chat__desc">{message.message}</span>
                                 <span className="chat__timestamp">{message.timestamp}</span>
+                                <Link to={"/delete/" + roomName + "/" + index}>
+                                    <IconButton style={{padding: "0"}}>
+                                        <DeleteRoundedIcon fontSize="small"/>
+                                    </IconButton>
+                                </Link>
                             </p>);
                     }
                 })}
