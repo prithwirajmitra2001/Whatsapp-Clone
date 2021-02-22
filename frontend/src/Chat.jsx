@@ -11,6 +11,10 @@ import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import MicIcon from '@material-ui/icons/Mic';
 import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
 
+function clicked(event) {
+    console.log(event.target.closest);
+}
+
 function Chat({messages, user}) {
 
     const [input, setInput] = useState("");
@@ -68,7 +72,7 @@ function Chat({messages, user}) {
                                 <span className="chat__desc">{message.message}</span>
                                 <span className="chat__timestamp">{message.timestamp}</span>
                                 <Link to={"/delete/" + roomName + "/" + index}>
-                                    <IconButton style={{padding: "0"}}>
+                                    <IconButton style={{padding: "0"}} onClick={clicked}>
                                         <DeleteRoundedIcon fontSize="small"/>
                                     </IconButton>
                                 </Link>

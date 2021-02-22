@@ -26,10 +26,10 @@ function Sidebar() {
             <div className="sidebar__header">
                 <div className="sidebar__headerRight">
                     <Avatar alt="avatar" src="https://img.favpng.com/11/21/25/iron-man-cartoon-avatar-superhero-icon-png-favpng-jrRBMJQjeUwuteGtBce87yMxz.jpg"/>
-                    <div className="sidebar__headerRight_Icons" onClick={addFriend}>
+                    <div className="sidebar__headerRight_Icons">
                         <IconButton><DonutLargeIcon /></IconButton>
                         <IconButton><ChatIcon /></IconButton>
-                        <IconButton><AddCircleIcon /></IconButton>
+                        <IconButton onClick={addFriend}><AddCircleIcon /></IconButton>
                     </div>
                 </div>
             </div>
