@@ -81,12 +81,20 @@ app.post("/messages/create", function(req, res) {
 
 app.put("/messages/delete", function(req, res) {
 
-    const dbMessage = req.body;
+    const dbMessage = {
+        "to": req.body.to,
+        "from": req.body.from,
+        "message": req.body.message
+    };
+    
     Messages.deleteOne(dbMessage, function(err) {
         if (err) {
             res.status(500).send(err);
+        } else {
+            res.status(201).send("deleted");
         }
     });
+    
 });
 
 // dbAuthentication Route

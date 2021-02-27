@@ -44,9 +44,6 @@ function App({user}) {
           <Route path="/rooms/:roomId">
             <Chat messages={messages} user={user}/>
           </Route>
-          <Route path="/delete/:roomId/:deleteId">
-            <Chat messages={messages} user={user}/>
-          </Route>
         </Router>
       </div>
     </div>
