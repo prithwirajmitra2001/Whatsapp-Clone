@@ -1,15 +1,20 @@
 import React, {useState} from "react";
+import {Link} from "react-router-dom";
 import "./styles/Sidebar.css";
 import "./styles/SidebarChat.css";
-import {Link} from "react-router-dom";
 
 import {Avatar, IconButton} from '@material-ui/core';
 import ChatIcon from '@material-ui/icons/Chat';
 import DonutLargeIcon from '@material-ui/icons/DonutLarge';
 import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
-function Sidebar() {
+function logout() {
+    alert("Successfully logged out");
+    window.location.assign("/");
+}
+
+function Sidebar({user}) {
 
     const [persons, setPersons] = useState([]);
 
@@ -25,11 +30,14 @@ function Sidebar() {
 
             <div className="sidebar__header">
                 <div className="sidebar__headerRight">
-                    <Avatar alt="avatar" src="https://img.favpng.com/11/21/25/iron-man-cartoon-avatar-superhero-icon-png-favpng-jrRBMJQjeUwuteGtBce87yMxz.jpg"/>
-                    <div className="sidebar__headerRight_Icons">
+                    <div className="sidebar__headerRight__desc">
+                        <Avatar alt="avatar" src="https://img.favpng.com/11/21/25/iron-man-cartoon-avatar-superhero-icon-png-favpng-jrRBMJQjeUwuteGtBce87yMxz.jpg"/>
+                        <p className="username"><b>{user}</b></p>
+                    </div>
+                    <div className="sidebar__headerRight__icons">
                         <IconButton><DonutLargeIcon /></IconButton>
-                        <IconButton><ChatIcon /></IconButton>
-                        <IconButton onClick={addFriend}><AddCircleIcon /></IconButton>
+                        <IconButton onClick={addFriend}><ChatIcon /></IconButton>
+                        <IconButton onClick={logout}><ExitToAppIcon/></IconButton>
                     </div>
                 </div>
             </div>

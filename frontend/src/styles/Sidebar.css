@@ -5,28 +5,20 @@
     border-right: 2px solid lightgray;
 }
 
-.sidebar__header {
+.sidebar__headerRight {
     display: flex;
     justify-content: space-between;
     padding: 20px;
     border-right: 1px solid lightgray;
 }
 
-.sidebar__headerRight {
+.sidebar__headerRight__desc {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    min-width: 10vw;
+    justify-content: center;
 }
 
-.sidebar__headerRight>.MuiSvgIcon-root {
-    margin-right: 2vw;
-    font-size: 24px !important;
-    padding: 25px;
-}
-
-.sidebar__headerRight_Icons {
-    padding-left: 16vw;
+.sidebar__headerRight__desc>.username {
+    margin-left: 25px;
 }
 
 .sidebar__search {

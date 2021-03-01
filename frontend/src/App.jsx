@@ -40,7 +40,7 @@ function App({user}) {
     <div className="app">
       <div className="app__body">
         <Router>
-          <Sidebar/>
+          <Sidebar user={user}/>
           <Route path="/rooms/:roomId">
             <Chat messages={messages} user={user}/>
           </Route>

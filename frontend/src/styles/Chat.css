@@ -53,6 +53,14 @@
     font-size: xx-small;
 }
 
+.roundedIcon {  
+    padding: "0";  
+    opacity: 0;
+}
+.roundedIcon:hover {  
+    opacity: 1;
+}
+
 .chat__footer {
     display: flex;
     justify-content: space-between;

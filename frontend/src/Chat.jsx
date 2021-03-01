@@ -65,10 +65,11 @@ function Chat({messages, user}) {
                             <p className = {(message.from === user) ? "chat__message chat__reciever" : "chat__message"} key={index}>
                                 <span className="chat__desc">{message.message}</span>
                                 <span className="chat__timestamp">{message.timestamp}</span>
-                                <IconButton onClick={() => deleteClicked(index)} style={{padding: "0"}}>
-                                    <DeleteRoundedIcon fontSize="small"/>
+                                <IconButton className="roundedIcon" onClick={() => deleteClicked(index)} style={{padding: "0"}}>
+                                        <DeleteRoundedIcon fontSize="small"/>
                                 </IconButton>
-                            </p>);
+                            </p>
+                        );
                     }
                 })}
             </div>
