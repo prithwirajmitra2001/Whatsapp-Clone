@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
-import "./styles/Chat.css";
 import axios from "./axios";
+import "./styles/Chat.css";
 
 import {Avatar, IconButton} from '@material-ui/core';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
@@ -52,7 +52,6 @@ function Chat({messages, user}) {
                 </div>
                 <div className = "chat__headerRight">
                     <IconButton><SearchOutlinedIcon /></IconButton>
-                    <IconButton><AttachFileIcon /></IconButton>
                     <IconButton><MoreVertIcon /></IconButton>
                 </div>
             </div>
@@ -76,6 +75,7 @@ function Chat({messages, user}) {
 
             <div className = "chat__footer">
                 <IconButton><InsertEmoticonIcon /></IconButton>
+                <IconButton><AttachFileIcon /></IconButton>
                 <form>
                     <input
                         value={input}

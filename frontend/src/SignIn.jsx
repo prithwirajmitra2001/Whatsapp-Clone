@@ -40,7 +40,7 @@ function SignIn() {
     <Container component="main" maxWidth="xs" className="page">
       <CssBaseline />
       <div className="paper">
-        <Avatar className="avatar">
+        <Avatar className="avatar"  style={{backgroundColor: "#f14668"}}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">Sign in</Typography>
@@ -58,9 +58,8 @@ function SignIn() {
           <Button
             type="submit" fullWidth variant="contained" color="primary"
             className="submit"
-            onClick={sendAuth}
-          >
-            Sign In
+            onClick={sendAuth}>
+              Sign In
           </Button>
         </form>
       </div>

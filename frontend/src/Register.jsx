@@ -32,7 +32,7 @@ function Register() {
     <Container component="main" maxWidth="xs" className="page">
       <CssBaseline />
       <div className="paper">
-        <Avatar className="avatar">
+        <Avatar className="avatar" style={{backgroundColor: "#f14668"}}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">Register</Typography>

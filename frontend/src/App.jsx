@@ -3,8 +3,8 @@ import Pusher from "pusher-js";
 import axios from "./axios.js";
 import Sidebar from "./Sidebar.jsx";
 import Chat from "./Chat.jsx";
-import "./styles/App.css";
 import {BrowserRouter as Router, Route} from 'react-router-dom';
+import "./styles/App.css";
 
 function App({user}) {
 

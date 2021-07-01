@@ -10,8 +10,9 @@ import SearchOutlinedIcon from '@material-ui/icons/SearchOutlined';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 function logout() {
-    alert("Successfully logged out");
-    window.location.assign("/");
+    if (window.confirm("Wish to logout ?")) {
+        window.location.assign("/");
+    }
 }
 
 function Sidebar({user}) {
@@ -37,7 +38,7 @@ function Sidebar({user}) {
                     <div className="sidebar__headerRight__icons">
                         <IconButton><DonutLargeIcon /></IconButton>
                         <IconButton onClick={addFriend}><ChatIcon /></IconButton>
-                        <IconButton onClick={logout}><ExitToAppIcon/></IconButton>
+                        <IconButton onClick={logout}><ExitToAppIcon /></IconButton>
                     </div>
                 </div>
             </div>

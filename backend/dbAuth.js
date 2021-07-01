@@ -1,16 +1,13 @@
 import mongoose from "mongoose";
-import validator from 'validator';
 
 const authSchema = new mongoose.Schema({
     username: {
         type: String,
-        required: true,
-        validate: [validator.isEmpty, 'Username is empty']
+        required: true
     },
     password: {
         type: String,
-        required: true,
-        validate: [validator.isEmpty, 'Password is empty']
+        required: true
     },
 });
 
